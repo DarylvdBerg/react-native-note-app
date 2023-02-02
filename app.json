@@ -28,6 +28,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "de2cc9a5-b563-4534-9504-9fcfe93ecd81"
+      }
+    },
+    "owner": "darylvdberg"
   }
 }
