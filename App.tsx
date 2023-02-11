@@ -1,4 +1,13 @@
 import { SafeAreaView, StyleSheet, View, Text} from 'react-native';
+import { Button, ButtonStyle } from '@components/Button';
+
+/**
+ * TODO:
+ * Add redux as state manager
+ * Add note entry in app
+ * Add note making view
+ * Save notes in sqlite?
+ **/
 
 export default function App() {
   return (
@@ -9,6 +18,10 @@ export default function App() {
             Your notes
           </Text>
         </SafeAreaView>
+      </View>
+
+      <View style={styles.newNoteContainer}>
+        <Button text="+" style={ButtonStyle.Primary}/>
       </View>
     </View>
   );
@@ -27,5 +40,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     paddingLeft: 24,
     paddingBottom: 8,
+  },
+  newNoteContainer: {
+    alignItems: 'center',
+    width: '100%',
+    position: 'absolute',
+    bottom: 50
   }
 });
