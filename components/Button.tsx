@@ -1,4 +1,4 @@
-import {Pressable, View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TouchableHighlight} from 'react-native';
 
 export enum ButtonStyle {
     Primary = 0,
@@ -18,11 +18,15 @@ export function Button(props: IButtonProps) {
     }
 
     return (
-        <Pressable style={styleMap[props.style] ?? styles.primary}>
+        <TouchableHighlight 
+            style={styleMap[props.style] ?? styles.primary}
+            underlayColor="#eeeee4"
+            activeOpacity={0.6}
+            onPress={props.clickHandler}>
             <View>
                 <Text style={styles.buttonText}>{props.text}</Text>
             </View>
-        </Pressable>
+        </TouchableHighlight>
     )
 }
 
