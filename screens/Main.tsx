@@ -9,7 +9,7 @@ export default function Main({navigation}) {
     const transitionToNewNoteScreen = () => {
         navigation.navigate(Constants.ADD_NOTE_SCREEN);
     }
-
+    
     return (
         <View style={styles.container}>
             <View style={styles.header}>
