@@ -1,6 +1,3 @@
-import { SafeAreaView, StyleSheet, View, Text} from 'react-native';
-import { Button, ButtonStyle } from '@components/Button';
-
 /**
  * TODO:
  * Add redux as state manager
@@ -9,42 +6,35 @@ import { Button, ButtonStyle } from '@components/Button';
  * Save notes in sqlite?
  **/
 
+import { NavigationContainer } from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
+// Constants
+import { Constants } from '@constants/Constants';
+
+// Screens
+import Main from '@screens/Main';
+import AddNote from '@screens/AddNote';
+
 export default function App() {
+  const Stack = createNativeStackNavigator();
+
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <SafeAreaView>
-          <Text style={styles.noteHeader}>
-            Your notes
-          </Text>
-        </SafeAreaView>
-      </View>
-
-      <View style={styles.newNoteContainer}>
-        <Button text="+" style={ButtonStyle.Primary}/>
-      </View>
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#696969",
-  },
-  header: {
-    backgroundColor: "#C5AE69",
-  },
-  noteHeader: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    paddingLeft: 24,
-    paddingBottom: 8,
-  },
-  newNoteContainer: {
-    alignItems: 'center',
-    width: '100%',
-    position: 'absolute',
-    bottom: 50
-  }
-});
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false
+        }}
+      >
+        <Stack.Screen 
+          name={Constants.MAIN_SCREEN}
+          component={Main}
+        />
+        <Stack.Screen 
+          name={Constants.ADD_NOTE_SCREEN}
+          component={AddNote}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  )
+};

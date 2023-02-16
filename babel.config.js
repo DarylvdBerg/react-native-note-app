@@ -11,6 +11,8 @@ module.exports = function(api) {
           alias: {
             // This needs to be mirrored in tsconfig.json
             '@components': './components',
+            '@screens': './screens',
+            '@constants': './constants'
           }
         }
       ]
