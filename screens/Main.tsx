@@ -1,5 +1,5 @@
 import { SafeAreaView, StyleSheet, View, Text} from 'react-native';
-import { Button, ButtonStyle } from '@components/Button';
+import { Button, ButtonSize, ButtonStyle } from '@components/Button';
 
 // Constants
 import { Constants } from '@constants/Constants';
@@ -20,11 +20,12 @@ export default function Main({navigation}) {
             </SafeAreaView>
             </View>
 
-            {/* Add new note §*/}
+            {/* Add new note */}
             <View style={styles.newNoteContainer}>
             <Button 
                 text="+" 
-                style={ButtonStyle.Primary} 
+                style={ButtonStyle.Primary}
+                size={ButtonSize.Large} 
                 clickHandler={transitionToNewNoteScreen}/>
             </View>
         </View>
@@ -34,7 +35,7 @@ export default function Main({navigation}) {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: "#696969",
+      backgroundColor: Constants.BACKGROUND_PRIMARY,
     },
     header: {
       backgroundColor: "#C5AE69",

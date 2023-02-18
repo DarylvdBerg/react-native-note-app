@@ -12,7 +12,8 @@ module.exports = function(api) {
             // This needs to be mirrored in tsconfig.json
             '@components': './components',
             '@screens': './screens',
-            '@constants': './constants'
+            '@constants': './constants',
+            '@models': './models'
           }
         }
       ]

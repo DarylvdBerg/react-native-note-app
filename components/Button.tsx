@@ -1,12 +1,20 @@
 import {View, Text, StyleSheet, TouchableHighlight} from 'react-native';
+import { isWhiteSpaceLike } from 'typescript';
 
 export enum ButtonStyle {
     Primary = 0,
     Secondary = 1,
 }
 
+export enum ButtonSize {
+    Small = 0,
+    Medium = 1,
+    Large = 2
+}
+
 export interface IButtonProps {
     text: string;
+    size: ButtonSize;
     style?: ButtonStyle;
     clickHandler?: any;
 }
@@ -17,6 +25,12 @@ export function Button(props: IButtonProps) {
         [ButtonStyle.Secondary]: styles.secondary,
     }
 
+    const sizeMap = {
+        [ButtonSize.Small]: styles.buttonSizeSmall,
+        [ButtonSize.Medium]: styles.buttonSizeMedium,
+        [ButtonSize.Large]: styles.buttonSizeLarge,
+    }
+
     return (
         <TouchableHighlight 
             style={styleMap[props.style] ?? styles.primary}
@@ -24,7 +38,7 @@ export function Button(props: IButtonProps) {
             activeOpacity={0.6}
             onPress={props.clickHandler}>
             <View>
-                <Text style={styles.buttonText}>{props.text}</Text>
+                <Text style={sizeMap[props.size]}>{props.text}</Text>
             </View>
         </TouchableHighlight>
     )
@@ -36,6 +50,10 @@ const defaultStyle = {
     paddingVertical: 5
 }
 
+const defaultButtonStyle = {
+    color: "white"
+}
+
 const styles = StyleSheet.create({
     primary: {
         backgroundColor: '#C5AE69',
@@ -45,8 +63,16 @@ const styles = StyleSheet.create({
         backgroundColor: 'grey',
         ...defaultStyle
     },
-    buttonText: {
+    buttonSizeSmall: {
+        fontSize: 16,
+        ...defaultButtonStyle
+    },
+    buttonSizeMedium: {
+        fontSize: 24,
+        ...defaultButtonStyle
+    },
+    buttonSizeLarge: {
         fontSize: 32,
-        color: 'white'
+        ...defaultButtonStyle
     }
 })
