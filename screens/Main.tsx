@@ -9,6 +9,8 @@ import { useState, useEffect } from 'react';
 import { database } from '@helpers/SQLiteHelper';
 
 export default function Main({navigation}) {
+
+    // TODO: Rewrite this to redux state :)
     const [notes, setNotes] = useState(null);
 
     useEffect(() => {
@@ -30,6 +32,15 @@ export default function Main({navigation}) {
             </View>
 
             {/* Render note component. */}
+            {
+              notes.map((note, index) => {
+                return (
+                  <View key={index}>
+                    <Text>{note.title}</Text>
+                  </View>
+                )
+              })
+            }
 
             {/* Add new note */}
             <View style={styles.newNoteContainer}>
