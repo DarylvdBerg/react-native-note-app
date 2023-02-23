@@ -4,7 +4,16 @@ import { Button, ButtonSize, ButtonStyle } from '@components/Button';
 // Constants
 import { Constants } from '@constants/Constants';
 
+// Helpers
+import { useState, useEffect } from 'react';
+import { database } from '@helpers/SQLiteHelper';
+
 export default function Main({navigation}) {
+    const [notes, setNotes] = useState(null);
+
+    useEffect(() => {
+      database.getNotes(setNotes)
+    }, []);
 
     const transitionToNewNoteScreen = () => {
         navigation.navigate(Constants.ADD_NOTE_SCREEN);
@@ -19,6 +28,8 @@ export default function Main({navigation}) {
                 </Text>
             </SafeAreaView>
             </View>
+
+            {/* Render note component. */}
 
             {/* Add new note */}
             <View style={styles.newNoteContainer}>
@@ -45,6 +56,10 @@ const styles = StyleSheet.create({
       fontWeight: 'bold',
       paddingLeft: 24,
       paddingBottom: 8,
+    },
+    noteTitle: {
+      color: 'white',
+      fontSize: 22
     },
     newNoteContainer: {
       alignItems: 'center',

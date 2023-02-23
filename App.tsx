@@ -16,25 +16,33 @@ import { Constants } from '@constants/Constants';
 import Main from '@screens/Main';
 import AddNote from '@screens/AddNote';
 
+// Hooks
+import useDatabase from '@hooks/useDatabase';
+
 export default function App() {
   const Stack = createNativeStackNavigator();
+  const isDbLoading = useDatabase();
 
-  return (
-    <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          headerShown: false
-        }}
-      >
-        <Stack.Screen 
-          name={Constants.MAIN_SCREEN}
-          component={Main}
-        />
-        <Stack.Screen 
-          name={Constants.ADD_NOTE_SCREEN}
-          component={AddNote}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
-  )
+  if(isDbLoading) {
+    return (
+      <NavigationContainer>
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false
+          }}
+        >
+          <Stack.Screen 
+            name={Constants.MAIN_SCREEN}
+            component={Main}
+          />
+          <Stack.Screen 
+            name={Constants.ADD_NOTE_SCREEN}
+            component={AddNote}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    )
+  } else {
+    return null;
+  }
 };
