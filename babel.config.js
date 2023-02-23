@@ -13,7 +13,9 @@ module.exports = function(api) {
             '@components': './components',
             '@screens': './screens',
             '@constants': './constants',
-            '@models': './models'
+            '@models': './models',
+            '@helpers': './helpers',
+            '@hooks': './hooks'
           }
         }
       ]
