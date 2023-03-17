@@ -2,6 +2,12 @@ import { StyleSheet, View, TextInput } from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useState } from 'react';
 
+// Helpers
+import { database } from '@helpers/DBHelper';
+
+// Store
+import { useNoteStore } from '@store/useNoteStore';
+
 // Constants
 import { Constants } from '@constants/Constants';
 
@@ -14,6 +20,7 @@ import { Button, ButtonSize, ButtonStyle } from '@components/Button';
 
 export default function AddNote({navigation}) {
     const [note, setNote] = useState<INote>(null);
+    const addNewNote = useNoteStore((state) => state.addNote);
 
     // Clickhandler for submitting then note
     const addNote = async() => {
@@ -22,8 +29,9 @@ export default function AddNote({navigation}) {
         }
         
         const newNote = new Note(note.title, note.content);
-
         // Push to SQLite and state management
+        addNewNote(newNote);
+        database.addNote(newNote);
         // Navigate back to homescreen
         navigation.pop();
     }

@@ -1,15 +1,21 @@
 import { SafeAreaView, StyleSheet, View, Text} from 'react-native';
 import { Button, ButtonSize, ButtonStyle } from '@components/Button';
-import { useState, useEffect } from 'react';
+
+// Helpers
+import { database } from '@helpers/DBHelper'
+
+// Stores
+import { useNoteStore } from '@store/useNoteStore';
 
 // Constants
 import { Constants } from '@constants/Constants';
 
 export default function Main({navigation}) {
 
-    // TODO: Rewrite this to redux state :)
-    const [notes, setNotes] = useState(null);
+    // Create table if not exists.
+    database.createTable();
 
+    const notes = useNoteStore((state) => state.notes);
     const transitionToNewNoteScreen = () => {
         navigation.navigate(Constants.ADD_NOTE_SCREEN);
     }
