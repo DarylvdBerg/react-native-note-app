@@ -10,6 +10,9 @@ import { useNoteStore } from '@store/useNoteStore';
 // Constants
 import { Constants } from '@constants/Constants';
 
+// Components
+import { NoteEntry } from '@components/NoteEntry';
+
 export default function Main({navigation}) {
 
     // Create table if not exists.
@@ -31,15 +34,15 @@ export default function Main({navigation}) {
             </View>
 
             {/* Render note component. */}
+            <View>
             {
               notes.map((note, index) => {
                 return (
-                  <View key={index}>
-                    <Text>{note.title}</Text>
-                  </View>
+                  <NoteEntry key={index} note={note} />
                 )
               })
             }
+            </View>
 
             {/* Add new note */}
             <View style={styles.newNoteContainer}>
