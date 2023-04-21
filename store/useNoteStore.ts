@@ -19,5 +19,5 @@ export const useNoteStore = create<NoteStore>()((set) => ({
             set(() => ({notes: notes}));
         })
     },
-    addNote: (note: Note) => set((state) => ({ notes: [...state.notes, note] })),
+    addNote: (note: Note) => set((state) => ({ notes: [note, ...state.notes] })),
 }))

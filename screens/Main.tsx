@@ -29,7 +29,7 @@ export default function Main({navigation}) {
             </View>
 
             {/* Render note component. */}
-            <ScrollView>
+            <ScrollView style={styles.notesView}>
             {
               notes.map((note, index) => {
                 return (
@@ -55,9 +55,14 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: Constants.BACKGROUND_PRIMARY,
+      height: "100%"
     },
     header: {
       backgroundColor: "#C5AE69",
+    },
+    notesView: {
+      height: "75%",
+      flexGrow: 0
     },
     noteHeader: {
       fontSize: 32,
