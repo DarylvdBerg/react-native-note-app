@@ -13,26 +13,31 @@ const createTable = (): void => {
     })
 }
 
-const getNotes = (): Note[] => {
-    var notes: Note[];
-
+const getNotes = (): Promise<Note[]> => {
+    return new Promise((resolve, reject) => {
     db.transaction(tx => {
         tx.executeSql('SELECT * FROM notes ORDER BY date DESC;',
-        [],
-        (_, { rows: {_array}}) => {
-            notes = _array;
-        });
-    }, (error) => {
-        console.log("Unable to retrieve notes:", error.message)
-    }, () => {
-        console.log("Requested all notes.")
-    })
-    return notes;
+        [], (_, { rows }) => {
+            const r = rows as unknown as { _array: Note[] };
+            var notes = r._array;
+             resolve(notes);
+          });
+        }, (error) => {
+            console.log("Unable to retrieve notes:", error.message)
+            reject(error);
+        }, () => {
+            console.log("Requested all notes.");
+        })
+    }) 
 }
 
 const addNote = (note: Note): void => {
     db.transaction(tx => {
         tx.executeSql("INSERT INTO notes(title, content, date) VALUES(?, ?, ?)", [note.title, note.content, note.date])
+    }, (error) => {
+        console.log("Unable to add note, reason: ", error)
+    }, () => {
+        console.log("Succesfully added note.")
     })
 }
 

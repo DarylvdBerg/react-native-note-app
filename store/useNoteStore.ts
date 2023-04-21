@@ -8,12 +8,16 @@ import { database } from '@helpers/DBHelper';
 // Interface
 interface NoteStore {
     notes: Note[];
-    getNotes: () => void;
+    loadNotesFromDb: () => void;
     addNote: (note: Note) => void;
 }
 
 export const useNoteStore = create<NoteStore>()((set) => ({
     notes: [],
-    getNotes: () => set((state) => ({ notes: database.getNotes() })),
+    loadNotesFromDb: () => {
+        database.getNotes().then((notes) => {
+            set(() => ({notes: notes}));
+        })
+    },
     addNote: (note: Note) => set((state) => ({ notes: [...state.notes, note] })),
 }))

@@ -1,8 +1,5 @@
-import { SafeAreaView, StyleSheet, View, Text} from 'react-native';
+import { SafeAreaView, StyleSheet, View, Text, ScrollView} from 'react-native';
 import { Button, ButtonSize, ButtonStyle } from '@components/Button';
-
-// Helpers
-import { database } from '@helpers/DBHelper'
 
 // Stores
 import { useNoteStore } from '@store/useNoteStore';
@@ -16,13 +13,11 @@ import { NoteEntry } from '@components/NoteEntry';
 export default function Main({navigation}) {
 
     // Create table if not exists.
-    database.createTable();
-
     const notes = useNoteStore((state) => state.notes);
     const transitionToNewNoteScreen = () => {
         navigation.navigate(Constants.ADD_NOTE_SCREEN);
     }
-    
+
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -34,7 +29,7 @@ export default function Main({navigation}) {
             </View>
 
             {/* Render note component. */}
-            <View>
+            <ScrollView>
             {
               notes.map((note, index) => {
                 return (
@@ -42,7 +37,7 @@ export default function Main({navigation}) {
                 )
               })
             }
-            </View>
+            </ScrollView>
 
             {/* Add new note */}
             <View style={styles.newNoteContainer}>

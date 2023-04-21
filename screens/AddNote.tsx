@@ -27,7 +27,7 @@ export default function AddNote({navigation}) {
         if(!note) {
             return;
         }
-        
+    
         const newNote = new Note(note.title, note.content);
         // Push to SQLite and state management
         addNewNote(newNote);

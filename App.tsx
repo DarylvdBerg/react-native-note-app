@@ -12,14 +12,20 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 // Constants
 import { Constants } from '@constants/Constants';
 
+// Helpers
+import { database } from '@helpers/DBHelper';
+
 // Screens
 import Main from '@screens/Main';
 import AddNote from '@screens/AddNote';
-
-// Redux
-import { Provider } from 'react-redux';
+import { useNoteStore } from '@store/useNoteStore';
 
 export default function App() {
+  // Create DB
+  database.createTable();
+  const loadNotesFromDb = useNoteStore((state) => state.loadNotesFromDb);
+  loadNotesFromDb();
+
   const Stack = createNativeStackNavigator();
   return (
     <NavigationContainer>
